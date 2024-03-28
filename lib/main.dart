@@ -1,196 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
+import 'app/pages/home.dart';
+import 'app/pages/book-details.dart';
 
 void main() {
-  runApp(Aula2());
+  runApp(Main());
 }
 
-class Aula2 extends StatelessWidget {
+class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'Morro Chico Mendes',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            backgroundColor: Color.fromARGB(255, 11, 69, 13),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          titleTextStyle: TextStyle(
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
           ),
-          body: Column(
-            children: [
-              Container(
-                child: Image.network(
-                  'https://www.caaro.org.br/gerenciador/data/uploads/2021/01/1-LUGAR-39-VALERIAPATRICIADOSSANTOSMAIA-MORRO-CHICO-MENDES-VISTA-PANORAMICA-DE-OURO-PRETO-scaled.jpg',
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(5),
-                margin: EdgeInsets.all(5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Brasil',
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold)),
-                          Text('Ouro Preto do Oeste - RO',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey.shade600,
-                                  fontWeight: FontWeight.normal)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.blue,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.blue,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.blue,
-                            size: 30,
-                          ),
-                          SizedBox(width: 5),
-                          Text('3.500',
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal),
-                              textAlign: TextAlign.center),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.all(20),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: 110,
-                        child: Column(
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.facebook,
-                                color: Colors.blue,
-                              ),
-                              iconSize: 30,
-                              onPressed: () async {
-                                const url = 'https://www.facebook.com/';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                            ),
-                            Text('facebook',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                                textAlign: TextAlign.center),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 110,
-                        child: Column(
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.map,
-                                color: Colors.blue,
-                              ),
-                              iconSize: 30,
-                              onPressed: () async {
-                                const url =
-                                    'https://maps.app.goo.gl/2vwNnkiXVf24V3AL7';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                            ),
-                            Text('endereço',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                                textAlign: TextAlign.center),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 110,
-                        child: Column(
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.share,
-                                color: Colors.blue,
-                              ),
-                              iconSize: 30,
-                              onPressed: () {
-                                Share.share(
-                                    'Compartilhe: https://morro_chico_mendes.com');
-                              },
-                            ),
-                            Text('compartilhar',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                                textAlign: TextAlign.center),
-                          ],
-                        ),
-                      ),
-                    ]),
-              ),
-              Container(
-                padding: EdgeInsets.all(5),
-                margin: EdgeInsets.all(5),
-                child: Text(
-                    'O Morro Chico Mendes é um dos pontos turísticos mais visitados de Rio Branco, capital do Acre. O local é uma homenagem ao líder seringueiro Chico Mendes, que lutou pela preservação da floresta amazônica e dos direitos dos trabalhadores rurais. O morro é um dos pontos mais altos da cidade e oferece uma vista panorâmica de Rio Branco.',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.justify),
-              ),
-            ],
-          )),
+        ),
+      ),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/bookDetails') {
+          final BookDetails args = settings.arguments as BookDetails;
+
+          return MaterialPageRoute(
+            builder: (context) => BookDetails(
+              book: args.book,
+              releaseDate: args.releaseDate,
+              coverImageUrl: args.coverImageUrl,
+              synopsis: args.synopsis,
+              author: args.author,
+              authorBiography: args.authorBiography,
+              publisher: args.publisher,
+            ),
+          );
+        }
+        // Define as outras rotas como antes
+        return MaterialPageRoute(
+          builder: (context) {
+            switch (settings.name) {
+              case '/main':
+                return Main();
+              case '/home':
+                return Home();
+              default:
+                return Home();
+            }
+          },
+        );
+      },
+      initialRoute: '/home',
     );
   }
 }
